@@ -14,16 +14,8 @@ void main(){
 		for(j=i;j>-1;j--){
 			if((key<ar[j-1])&&(j!=0)){
 				ar[j]=ar[j-1];
-				for(k=0;k<n;k++){
-					printf("%d ",ar[k]);
-				}
-				printf("\n");
 			}else{
 				ar[j]=key;
-				for(k=0;k<n;k++){
-					printf("%d ",ar[k]);
-				}
-				printf("\n");
 				break;
 			}
 		}
