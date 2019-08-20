@@ -1,4 +1,3 @@
-///not working
 #include<stdio.h>
 
 void merge(int a[], int l, int m, int h){
@@ -33,19 +32,18 @@ void mergeSort(int a[], int l, int h){
 		int mid=(l+h)/2;
 		mergeSort(a,l,mid);
 		mergeSort(a,mid+1,h);
-		merge(a,l,mid+1,h);
+		merge(a,l,mid,h);
 	}
 }
 
 void main(){
-	int ar[20]={3,4,9,8,2,1},i,n=6;
-	/*
+	int ar[20],i,n;
 	printf("Enter array limit:");
 	scanf("%d",&n);
 	printf("Enter elements:\n");
 	for(i=0;i<n;i++){
 		scanf("%d",&ar[i]);
-	}*/
+	}
 	mergeSort(ar,0,n-1);
 	printf("Sorted array:\n");
 	for(i=0;i<n;i++){
