@@ -1,9 +1,9 @@
 #include<stdio.h>
 
 void merge(int a[], int l, int m, int h){
-	int t[20],i=l,j=m+1,k=0;
+	int t[20],i=l,j=m+1,k=l;
 	while(i<=m && j<=h){
-		if(a[i]<=a[j]){
+		if(a[i]<a[j]){
 			t[k]=a[i];
 			++i;
 		}else{
