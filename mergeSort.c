@@ -1,3 +1,4 @@
+///not working
 #include<stdio.h>
 
 void merge(int a[], int l, int m, int h){
