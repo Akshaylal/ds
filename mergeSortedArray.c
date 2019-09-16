@@ -55,14 +55,6 @@ void main(){
 			j++;
 		}
 	}
-	printf("Array 1:\n");
-	for(i=0;i<n1;i++){
-		printf("%d ",a1[i]);
-	}
-	printf("\nArray 2:\n");
-	for(i=0;i<n2;i++){
-		printf("%d ",a2[i]);
-	}
 	printf("\nMerged Array:\n");
 	for(i=0;i<(n1+n2);i++){
 		printf("%d ",b[i]);
