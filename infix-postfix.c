@@ -1,13 +1,14 @@
 #include <stdio.h>
 #define STACK_MAX 100
 
-int stack[STACK_MAX], top = -1;
+char stack[STACK_MAX];
+int top = -1;
 
 void push(char key){
 	if(STACK_MAX <= top){
 		printf("Stack Overflow\n");
 	}else{
-		s[++top] = key;	
+		stack[++top] = key;	
 	}
 }
 
@@ -15,7 +16,7 @@ char pop(){
 	if(top < 0){
 		printf("Stack Underflow\n");
 	}else{
-		return s[top--];
+		return stack[top--];
 	}
 }
 
@@ -56,9 +57,26 @@ int ICP(char inp){
 }
 
 void main(){
-	char str[100], i = -1;
+	char str[100], c, ch;
+	int i = -1;
 	push('(');
-	while((c = getchar()) != ')'){
-		if(
+	while((c = getchar()) != '\n'){
+		if((c>'A' & c<'Z') | (c>'a' &c<'z')){
+			str[++i] = c;
+		}else if(c == ')'){
+			while((ch = pop()) != '('){
+				str[++i] = ch;
+			}
+		}else{
+			if(ICP(c) > ISP()){
+				push(c);
+			}else{
+				while(ISP() >= ICP(c)){
+					str[++i] = pop();
+				}
+			}
+		}
 	}
+	str[++i] = '\0';
+	printf("%s\n",str);
 }
