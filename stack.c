@@ -12,6 +12,7 @@ void push(int s[], int *top, int key){
 int pop(int s[], int *top){
 	if((*top) < 0){
 		printf("Stack Underflow\n");
+		return NULL;
 	}else{
 		return s[(*top)--];
 	}
@@ -37,7 +38,10 @@ void main(){
 				scanf("%d",&key);
 				push(stack,&top,key);
 				break;
-			case 2:printf("%d\n", pop(stack,&top));
+			case 2:key = pop(stack,&top);
+				if(key!=NULL){
+					printf("%d\n", key);
+				}
 				break;
 			case 3:status(stack, &top);
 				break;
