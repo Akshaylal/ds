@@ -61,19 +61,17 @@ void main(){
 	int i = -1;
 	push('(');
 	while((c = getchar()) != '\n'){
-		if((c>'A' & c<'Z') | (c>'a' &c<'z')){
+		if(c>'a' && c<'z'){
 			str[++i] = c;
 		}else if(c == ')'){
 			while((ch = pop()) != '('){
 				str[++i] = ch;
 			}
-		}else{
-			if(ICP(c) > ISP()){
-				push(c);
-			}else{
-				while(ISP() >= ICP(c)){
-					str[++i] = pop();
-				}
+		}else if(ICP(c) > ISP()){
+			push(c);
+		}else if(ISP() >= ICP(c)){
+			while(ISP() >= ICP(c)){
+				str[++i] = pop();
 			}
 		}
 	}
