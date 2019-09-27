@@ -20,61 +20,77 @@ char pop(){
 	}
 }
 
-int ISP(){
-	int y;
-	char x = pop();
-	switch(x){
-		case '(':y = 0;
-		break;
+int ISP(int inp){
+	switch(inp){
 		case '+':
-		case '-':y = 2;
-		break;
+		case '-':
+			return 2;
+			break;
 		case '*':
 		case '/':
-		case '%':y = 4;
-		break;
-		case '^':y = 5;
-		break;
+			return 4;
+			break;
+		case '^':return 5;
+			break;
+		case '(':return 0;
+			break;
 	}
-	push(x);
-	return y;
 }
 
 int ICP(char inp){
 	switch(inp){
-		case '(':return 100;
-		break;
 		case '+':
-		case '-':return 1;
-		break;
+		case '-':
+			return 1;
+			break;
 		case '*':
 		case '/':
-		case '%':return 3;
-		break;
+			return 3;
+			break;
 		case '^':return 6;
-		break;
+			break;
+		case '(':return 9;
+			break;
+		case ')':return 0;
+			break;
 	}
 }
 
 void main(){
-	char str[100], c, ch;
-	int i = -1;
+	char str[100], item, x;
+	int i = -1, f = 1;
 	push('(');
-	while((c = getchar()) != '\n'){
-		if(c>'a' && c<'z'){
-			str[++i] = c;
-		}else if(c == ')'){
-			while((ch = pop()) != '('){
-				str[++i] = ch;
+	
+	while(top > -1){
+		item = getchar();
+		x = pop();
+		if(item < 'z' & item > 'a'){
+			push(x);
+			str[++i] = item;
+		}else if(item == ')'){
+			while(x != '('){
+				str[++i] = x;
+				x = pop();
 			}
-		}else if(ICP(c) > ISP()){
-			push(c);
-		}else if(ISP() >= ICP(c)){
-			while(ISP() >= ICP(c)){
-				str[++i] = pop();
+		}else if(ISP(x) >= ICP(item)){
+			while(ISP(x) >= ICP(item)){
+				str[++i] = x;
+				x = pop();
 			}
+			push(x);
+			push(item);
+		}else if(ISP(x) < ICP(item)){
+			push(x);
+			push(item);
+		}else{
+			f = 0;
+			break;
 		}
 	}
 	str[++i] = '\0';
-	printf("%s\n",str);
+	if(f){
+		printf("%s\n",str);
+	}else{
+		printf("Invalid Expression");
+	}
 }
