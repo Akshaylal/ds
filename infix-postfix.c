@@ -48,6 +48,8 @@ void main(){
 	int i = -1, f = 1;
 	push('(');
 	
+	printf("Enter infix : ");
+	
 	while(top > -1){
 		item = getchar();
 		x = pop();
