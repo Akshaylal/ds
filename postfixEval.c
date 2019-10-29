@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include <stdlib.h>
+
 #define STACK_MAX 100
 
 float stack[STACK_MAX];
