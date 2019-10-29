@@ -6,8 +6,6 @@ struct node{
 	struct node *link;
 }*ptr, *pnew, *header = NULL;
 
-//malloc(sizeof(struct node));
-
 void push(int dat){
 	pnew = malloc(sizeof(struct node));
 	if(pnew == NULL){
