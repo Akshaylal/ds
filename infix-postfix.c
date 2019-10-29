@@ -53,7 +53,7 @@ void main(){
 	while(top > -1){
 		item = getchar();
 		x = pop();
-		if(item < 'z' & item > 'a'){
+		if(item <= 'z' & item >= 'a'){
 			push(x);
 			str[++i] = item;
 		}else if(item == ')'){
