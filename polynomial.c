@@ -77,9 +77,17 @@ struct poly* padd(struct poly *pptr, struct poly *qptr){
 }
 
 void display(struct poly *ptr){
+	struct poly *p = ptr;
 	while(ptr != NULL){
-		printf("%dx^%d+", ptr->coe, ptr->exp);
-		ptr = ptr->link; 
+		if(ptr->coe != 0){
+			if(ptr->coe < 0){
+				printf("%d", ptr->coe);
+			}else{
+				printf("+%d", ptr->coe);
+			}	
+			printf("x^%d", ptr->exp);
+		}
+		ptr = ptr->link;
 	}
 }
 
