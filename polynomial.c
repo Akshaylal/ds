@@ -4,7 +4,7 @@
 struct poly{
 	int exp, coe;
 	struct poly *link;
-}*ptr2;
+}*pnew, *ptr2;
 
 struct poly* getNode(){
 	struct poly *p = malloc(sizeof(struct poly));
@@ -14,7 +14,7 @@ struct poly* getNode(){
 
 
 void read_poly(struct poly **header){
-	struct poly *pnew, *ptr;
+	struct poly *ptr;
 	int n, i;
 	*header = NULL;
 	printf("Enter number of terms:");
@@ -32,6 +32,10 @@ void read_poly(struct poly **header){
 		}
 		ptr = pnew;
 	}	
+}
+
+struct node* proper(struct node *ptr){
+	struct node oheader, iheader
 }
 
 struct poly* padd(struct poly *pptr, struct poly *qptr){
@@ -76,6 +80,28 @@ struct poly* padd(struct poly *pptr, struct poly *qptr){
 	return h->link;
 }
 
+struct poly* pmul(struct poly *pptr, struct poly *qptr){
+	struct poly *h = getNode(), *rptr, *rptr1, *qptrc;
+	int coe, exp;
+	rptr = h;
+	if((pptr == NULL) | (qptr == NULL)){
+		printf("Cannot perform multiplication\n");	
+	}else{
+		while(pptr != NULL){
+			qptrc = qptr;
+			while(qptrc != NULL){
+				rptr->link = getNode();
+				rptr = rptr->link;
+				rptr->coe = pptr->coe * qptrc->coe;
+				rptr->exp = pptr->exp + qptrc->exp;
+				qptrc = qptrc->link;
+			}
+			pptr = pptr->link;
+		}
+	}
+	return h->link;
+}
+
 void display(struct poly *ptr){
 	struct poly *p = ptr;
 	while(ptr != NULL){
@@ -103,7 +129,7 @@ void main(){
 	printf("\n");
 	display(p2);
 	printf("\n");
-	p3 = padd(p1, p2);
+	p3 = pmul(p1, p2);
 	display(p3);
 	printf("\n");
 }
