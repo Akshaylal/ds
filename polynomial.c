@@ -33,7 +33,7 @@ void read_poly(struct poly **header){
 		ptr = pnew;
 	}	
 }
-/*
+
 struct poly* proper(struct poly *ptr){
 	struct poly *max = ptr, *ptt, *oheader = NULL, *iheader = ptr;
 	while(iheader != NULL){
@@ -77,7 +77,7 @@ struct poly* proper(struct poly *ptr){
 	}
 	return oheader;
 }
-*/
+
 struct poly* padd(struct poly *pptr, struct poly *qptr){
 	struct poly *h = getNode(), *rptr;
 	rptr = h;
