@@ -4,7 +4,7 @@
 struct poly{
 	int exp, coe;
 	struct poly *link;
-}*pnew, *ptr2;
+}*pnew;
 
 struct poly* getNode(){
 	struct poly *p = malloc(sizeof(struct poly));
@@ -55,23 +55,19 @@ struct poly* padd(struct poly *pptr, struct poly *qptr){
 			qptr = qptr->link;
 		}
 	}
-	if(pptr != NULL){
-		while(pptr != NULL){
-			rptr->link = getNode();
-			rptr = rptr->link;
-			rptr->exp = pptr->exp;
-			rptr->coe = pptr->coe;
-			pptr = pptr->link;
-		}
+	while(pptr != NULL){
+		rptr->link = getNode();
+		rptr = rptr->link;
+		rptr->exp = pptr->exp;
+		rptr->coe = pptr->coe;
+		pptr = pptr->link;
 	}
-	if(qptr != NULL){
-		while(qptr != NULL){
-			rptr->link = getNode();
-			rptr = rptr->link;
-			rptr->exp = qptr->exp;
-			rptr->coe = qptr->coe;
-			qptr = qptr->link;
-		}
+	while(qptr != NULL){
+		rptr->link = getNode();
+		rptr = rptr->link;
+		rptr->exp = qptr->exp;
+		rptr->coe = qptr->coe;
+		qptr = qptr->link;
 	}
 	return h->link;
 }
@@ -97,23 +93,19 @@ struct poly* psub(struct poly *pptr, struct poly *qptr){
 			qptr = qptr->link;
 		}
 	}
-	if(pptr != NULL){
-		while(pptr != NULL){
-			rptr->link = getNode();
-			rptr = rptr->link;
-			rptr->exp = pptr->exp;
-			rptr->coe = pptr->coe;
-			pptr = pptr->link;
-		}
+	while(pptr != NULL){
+		rptr->link = getNode();
+		rptr = rptr->link;
+		rptr->exp = pptr->exp;
+		rptr->coe = pptr->coe;
+		pptr = pptr->link;
 	}
-	if(qptr != NULL){
-		while(qptr != NULL){
-			rptr->link = getNode();
-			rptr = rptr->link;
-			rptr->exp = qptr->exp;
-			rptr->coe = -qptr->coe;
-			qptr = qptr->link;
-		}
+	while(qptr != NULL){
+		rptr->link = getNode();
+		rptr = rptr->link;
+		rptr->exp = qptr->exp;
+		rptr->coe = -qptr->coe;
+		qptr = qptr->link;
 	}
 	return h->link;
 }
