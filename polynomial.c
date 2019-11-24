@@ -76,8 +76,51 @@ struct poly* padd(struct poly *pptr, struct poly *qptr){
 	return h->link;
 }
 
+struct poly* psub(struct poly *pptr, struct poly *qptr){
+	struct poly *h = getNode(), *rptr;
+	rptr = h;
+	while((pptr != NULL) & (qptr != NULL)){
+		rptr->link = getNode();
+		rptr = rptr->link;
+		if(pptr->exp == qptr->exp){
+			rptr->exp = pptr->exp;
+			rptr->coe = pptr->coe - qptr->coe;
+			pptr = pptr->link;
+			qptr = qptr->link;
+		}else if(pptr->exp > qptr->exp){
+			rptr->exp = pptr->exp;
+			rptr->coe = pptr->coe;
+			pptr = pptr->link;
+		}else{
+			rptr->exp = qptr->exp;
+			rptr->coe = -qptr->coe;
+			qptr = qptr->link;
+		}
+	}
+	if(pptr != NULL){
+		while(pptr != NULL){
+			rptr->link = getNode();
+			rptr = rptr->link;
+			rptr->exp = pptr->exp;
+			rptr->coe = pptr->coe;
+			pptr = pptr->link;
+		}
+	}
+	if(qptr != NULL){
+		while(qptr != NULL){
+			rptr->link = getNode();
+			rptr = rptr->link;
+			rptr->exp = qptr->exp;
+			rptr->coe = -qptr->coe;
+			qptr = qptr->link;
+		}
+	}
+	return h->link;
+}
+
+
 struct poly* pmul(struct poly *pptr, struct poly *qptr){
-	struct poly *h = getNode(), *rptr, *rptr1, *qptrc;
+	struct poly *h = getNode(), *rptr, *rptr1, *qptrc, *rptrc;
 	int coe, exp;
 	rptr = h;
 	if((pptr == NULL) | (qptr == NULL)){
@@ -86,10 +129,33 @@ struct poly* pmul(struct poly *pptr, struct poly *qptr){
 		while(pptr != NULL){
 			qptrc = qptr;
 			while(qptrc != NULL){
-				rptr->link = getNode();
-				rptr = rptr->link;
-				rptr->coe = pptr->coe * qptrc->coe;
-				rptr->exp = pptr->exp + qptrc->exp;
+				rptrc = h;
+				coe = pptr->coe * qptrc->coe;
+				exp = pptr->exp + qptrc->exp;
+				rptr1 = NULL;
+				while(rptrc != NULL){
+					if(rptrc->exp == exp){
+						break;
+					}
+					rptr1 = rptrc;
+					rptrc = rptrc->link;
+				}
+				if(h == NULL){
+					h = getNode();
+					h->exp = exp;
+					h->coe = coe;
+				}else if(rptr1 != NULL & rptrc == NULL){	
+					if(rptr1->exp == exp){
+						rptr1->coe += coe;
+					}else{
+						rptr1->link = getNode();
+						rptr1 = rptr1->link;
+						rptr1->coe = coe;
+						rptr1->exp = exp;
+					}
+				}else{
+					rptrc->coe += coe;
+				}
 				qptrc = qptrc->link;
 			}
 			pptr = pptr->link;
@@ -121,10 +187,17 @@ void main(){
 	read_poly(&p1);
 	printf("Second polynomial:\n");
 	read_poly(&p2);
+	printf("Polynomial 1: ");
 	display(p1);
-	printf("\n");
+	printf("\nPolynomial 2: ");
 	display(p2);
-	printf("\n");
+	printf("\nAddition : ");
+	p3 = padd(p1, p2);
+	display(p3);
+	printf("\nSubstraction : ");
+	p3 = psub(p1, p2);
+	display(p3);
+	printf("\nMultiply : ");
 	p3 = pmul(p1, p2);
 	display(p3);
 	printf("\n");
