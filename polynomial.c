@@ -116,7 +116,8 @@ struct poly* pmul(struct poly *pptr, struct poly *qptr){
 	int coe, exp;
 	rptr = h;
 	if((pptr == NULL) | (qptr == NULL)){
-		printf("Cannot perform multiplication\n");	
+		printf("Cannot perform multiplication\n");
+		return NULL;	
 	}else{
 		while(pptr != NULL){
 			qptrc = qptr;
