@@ -1,7 +1,7 @@
 #include<stdio.h>
 #define HEAP_SIZE 100
 
-int n = -1, elements = 0, heap[HEAP_SIZE];
+int n = -1, heap[HEAP_SIZE];
 
 
 void maxHeap(int x){
