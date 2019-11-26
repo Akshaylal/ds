@@ -1,39 +1,38 @@
 #include<stdio.h>
 #define HEAP_SIZE 100
 
-void createHeap(int b[], int a[], int n){
-	int i, j, temp;
-	for(i=0; i<n; ++i){
-		b[i] = a[i];
-		j = i;
-		while(j>0){
-			if(b[j]>b[(j-1)/2]){
-				temp = b[j];
-				b[j] = b[(j-1)/2];
-				b[(j-1)/2] = temp;
-				j = (j-1)/2;
-			}
-			else
-				j=0;
-		}		
+int n = -1, elements = 0, heap[HEAP_SIZE];
+
+
+void maxHeap(int x){
+	int i, p, tmp;
+	if(n >= HEAP_SIZE){
+		printf("Heap Full\n");
+	}else{
+		heap[++n] = x;
+		i = n;
+		p = i / 2;
+		while((p >= 0) & (heap[p] < heap[i])){
+			tmp = heap[p];
+			heap[p] = heap[i];
+			heap[i] = tmp;
+			i = p;
+			p = p / 2;
+		}
 	}
-	
 }
 
 void main(){
-	int a[HEAP_SIZE], n, b[HEAP_SIZE], i;
-	printf("Enter array limit: ");
-	scanf("%d", &n);
-	printf("Enter elements: ");
-	for(i=0; i<n; ++i)
-		scanf("%d", &a[i]);
-	printf("Array : \n");
-	for(i=0; i<n; ++i)
-		printf("%d\t", a[i]);
+	int c, key, i;
+	do{
+		printf("key : ");
+		scanf("%d", &key);
+		maxHeap(key);
+		printf("more?(1/0) : ");
+		scanf("%d", &c);
+	}while(c != 0);
+	for(i = 0; i <= n; ++i){
+		printf("%d ", heap[i]);
+	}
 	printf("\n");
-	createHeap(b,a,n);
-	printf("After Max Heap \n");
-	for(i=0; i<n; ++i)
-		printf("%d\t", b[i]);
-	printf("\n");	
 }
