@@ -3,21 +3,20 @@
 
 int n = -1, heap[HEAP_SIZE];
 
-
 void maxHeap(int x){
-	int i, p, tmp;
-	if(n >= HEAP_SIZE){
+	int i, p, temp;
+	if(n>HEAP_SIZE){
 		printf("Heap Full\n");
 	}else{
 		heap[++n] = x;
 		i = n;
 		p = i / 2;
-		while((p >= 0) & (heap[p] < heap[i])){
-			tmp = heap[p];
+		while(p >= 0 & heap[p] < heap[i]){
+			temp = heap[p];
 			heap[p] = heap[i];
-			heap[i] = tmp;
+			heap[i] = temp;
 			i = p;
-			p = p / 2;
+			p = i / 2;
 		}
 	}
 }
